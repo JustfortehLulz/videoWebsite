@@ -1,0 +1,8 @@
+{
+    "name": "videoplayer",
+    "version": "1.0.0",
+    "author": "Johnston Yang",
+    "devDependencies": {
+        "browser-sync": "^2.29.3"
+    }
+}
