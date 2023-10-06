@@ -16,6 +16,7 @@ const playButton = document.getElementById('play');
 // If the video is already playing and the user clicks on it, it will pause the video
 function togglePlay()
 {
+  console.log(video.currentTime);
     if(video.paused || video.ended)
     {
         video.play();
@@ -226,6 +227,7 @@ const playbackAnimation = document.getElementById('playback-animation');
 
 // animatePlayback displays an animation when
 // the video is played or paused
+// allows for toggling pause or play on the video itself
 function animatePlayback() 
 {
     playbackAnimation.animate([
@@ -239,6 +241,7 @@ function animatePlayback()
       }], {
       duration: 500
     });
+    
 }
 
 video.addEventListener('click', togglePlay);
@@ -342,26 +345,50 @@ function showControls()
 //change the display video
 
 const newVideoThumb = document.getElementById('thumbVideo');
-const newVideoTitle = document.getElementById('thumbVideo').alt;
 const oldVideoTitle = document.getElementsByTagName('source');
 
-
-// changing videos, should swap what is currently being played and what has been clicked on
-function changeVideo()
+// changing videos.
+// swaps the video that is currently being played
+function changeVideo(element)
 {
+  var newVideo = "";
+  var url = "";
+  var indexSpace = 0;
+  var newURL = "";
+  var posVideo = 0;
+  var setUrl = "";
+  
+  console.log(element.getAttribute('value'));
+  var val = element.getAttribute('value')
+  console.log(val);
+
+  // first part changes the video
+  // grabbing the video title that will be played
   video.pause();
-  //grabs the title
-  // console.log(oldVideoTitle[0].src);
-  // console.log(newVideoTitle);
-  var url = oldVideoTitle[0].src;
-  // add a check if video titles have spaces
-  var newURL = newVideoTitle.replace(' ', '%20');
-  url = url.slice(0,22) + "/" + newURL;
-  // console.log(url);
-  oldVideoTitle[0].setAttribute('src',url);
-  console.log(oldVideoTitle[0].src);
+  newVideo = newVideoThumb.alt;
+  
+  // grabs the title that will be swapped out
+  url = oldVideoTitle[val].src;
+  // check if video titles have spaces
+  if(newVideo.includes(" "))
+  {
+    indexSpace = newVideo.indexOf(" ");
+    newURL = newVideo.slice(0,indexSpace) + '%20' + newVideo.slice(indexSpace+1);
+  }
+  else
+  {
+    newURL = newVideo;
+  }
+  posVideo = url.indexOf("video");
+  setUrl = url.slice(0,posVideo) + newURL;
+  // sets the new url
+  oldVideoTitle[val].setAttribute('src',setUrl);
+
   video.load();
   video.play();
+  updatePlayButton();
+  // switches the old video to the thumbnail 
+  newVideoThumb.setAttribute('alt',url.slice(posVideo));
 }
 
 newVideoThumb.addEventListener('click', changeVideo);
