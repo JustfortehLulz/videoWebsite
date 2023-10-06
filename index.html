@@ -18,7 +18,7 @@
       </div>
 
       <video controls class="video" id="video" preload="metadata" poster="poster.jpg">
-        <source src="video/2023-09-29 18-50-05.mp4" type="video/mp4"></source>
+        <source id="videoSource" src="video/2023-09-29 18-50-05.mp4" type="video/mp4"></source>
       </video>
 
       <div class="video-controls hidden" id="video-controls">
@@ -76,7 +76,8 @@
 
     <div class="ListVideo">
       <div class="previewVideo">
-        <img src="poster.jpg" id="thumbVideo" value="0" onclick="changeVideo(this)" alt="video/2023-09-29 18-58-54.mp4">
+        <img src="poster.jpg" id="video0" class="thumbVideo" value="0" onclick="changeVideo(this)" alt="video/2023-09-29 18-58-54.mp4">
+        <img src="poster.jpg" id="video1" class="thumbVideo" value="1" onclick="changeVideo(this)" alt="video/2023-09-29 22-06-17.mp4">
       </div>
     </div>
   </div>

@@ -344,8 +344,8 @@ function showControls()
 
 //change the display video
 
-const newVideoThumb = document.getElementById('thumbVideo');
-const oldVideoTitle = document.getElementsByTagName('source');
+const oldVideoTitle = document.getElementById('videoSource');
+const newVideoThumb = document.getElementsByClassName('thumbVideo');
 
 // changing videos.
 // swaps the video that is currently being played
@@ -358,17 +358,19 @@ function changeVideo(element)
   var posVideo = 0;
   var setUrl = "";
   
+
   console.log(element.getAttribute('value'));
   var val = element.getAttribute('value')
+  var selectVideo = document.getElementById('video'+val);
   console.log(val);
 
   // first part changes the video
   // grabbing the video title that will be played
   video.pause();
-  newVideo = newVideoThumb.alt;
+  newVideo = selectVideo.alt;
   
   // grabs the title that will be swapped out
-  url = oldVideoTitle[val].src;
+  url = oldVideoTitle.src;
   // check if video titles have spaces
   if(newVideo.includes(" "))
   {
@@ -382,13 +384,13 @@ function changeVideo(element)
   posVideo = url.indexOf("video");
   setUrl = url.slice(0,posVideo) + newURL;
   // sets the new url
-  oldVideoTitle[val].setAttribute('src',setUrl);
+  oldVideoTitle.setAttribute('src',setUrl);
 
   video.load();
   video.play();
   updatePlayButton();
   // switches the old video to the thumbnail 
-  newVideoThumb.setAttribute('alt',url.slice(posVideo));
+  selectVideo.setAttribute('alt',url.slice(posVideo));
 }
 
 newVideoThumb.addEventListener('click', changeVideo);
