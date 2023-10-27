@@ -359,8 +359,8 @@ function changeVideo(element)
   var setUrl = "";
   
 
-  console.log(element.getAttribute('value'));
-  var val = element.getAttribute('value')
+  //console.log(element.getAttribute('value'));
+  var val = element.getAttribute('value');
   var selectVideo = document.getElementById('video'+val);
   console.log(val);
 
@@ -393,7 +393,13 @@ function changeVideo(element)
   selectVideo.setAttribute('alt',url.slice(posVideo));
 }
 
-newVideoThumb.addEventListener('click', changeVideo);
+var lenThumb = newVideoThumb.length;
+// loop through the entire collection of newThumbs
+for (var i = 0; i <lenThumb; i++)
+{
+  newVideoThumb[i].addEventListener('click', changeVideo);
+}
+
 
 video.addEventListener('mouseenter', showControls);
 video.addEventListener('mouseleave', hideControls);
@@ -404,10 +410,10 @@ videoControls.addEventListener('mouseleave', hideControls);
 // each supported shortcut key
 function keyboardShortcuts(event) 
 {
-    const { key } = event;
+    const {key} = event;
     switch(key)
     {
-      case 'k':
+      case "k":
         togglePlay();
         animatePlayback();
         if (video.paused)
@@ -421,7 +427,7 @@ function keyboardShortcuts(event)
           }, 2000);
         }
         break;
-      case ' ':
+      case " ":
         togglePlay();
         animatePlayback();
         if (video.paused)
@@ -435,19 +441,19 @@ function keyboardShortcuts(event)
           }, 2000);
         }
         break;
-      case 'm':
+      case "m":
         toggleMute();
         break;
-      case 'f':
+      case "f":
         toggleFullScreen();
         break;
-      case 'p':
+      case "p":
         togglePip();
         break;
-      case 'l':
+      case "l":
         skip10Seconds();
         break;
-      case 'j':
+      case "j":
         goBack10Seconds();
         break;
     }
