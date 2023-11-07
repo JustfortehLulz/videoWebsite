@@ -2,8 +2,8 @@
 
 TODO:
 
-- Add other videos
 - Video Titles
+- separate video thumbnails
 - create a button that checks the video folder and sees if there are any new videos
 - Mini player scrub
 
