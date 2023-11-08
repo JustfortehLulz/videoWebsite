@@ -357,21 +357,31 @@ function changeVideo(element)
   var newURL = "";
   var posVideo = 0;
   var setUrl = "";
+  var newTitle = "";
+  var parent = "";
   
 
   //console.log(element.getAttribute('value'));
+  console.log(element);
   var val = element.getAttribute('value');
   var selectVideo = document.getElementById('video'+val);
-  console.log(val);
 
   // first part changes the video
-  // grabbing the video title that will be played
+  // grabbing the video that will be played
   video.pause();
   newVideo = selectVideo.alt;
+
+  // changes the title to the newly selected video
+  newTitle = document.getElementById('title'+val);
+  title = newTitle.textContent;
+  const oldVideoTitleText = document.getElementById('videoTitle');
+  previousTitle = oldVideoTitleText.textContent;
+  oldVideoTitleText.textContent = title; 
+  oldVideoTitle.setAttribute('data-title',title);
   
-  // grabs the title that will be swapped out
+  // grabs the video that will be swapped out
   url = oldVideoTitle.src;
-  // check if video titles have spaces
+  // check if video link have spaces
   if(newVideo.includes(" "))
   {
     indexSpace = newVideo.indexOf(" ");
@@ -386,11 +396,21 @@ function changeVideo(element)
   // sets the new url
   oldVideoTitle.setAttribute('src',setUrl);
 
+  // switches the old video to the thumbnail 
+  selectVideo.setAttribute('alt',url.slice(posVideo));
+
+  // replaces the selected title to the old title
+  // var oldTitle = oldVideoTitle.getAttribute('data-title');
+  var videoTitle = document.getElementById('title'+val);
+  // console.log(oldTitle);
+  videoTitle.textContent = previousTitle;
+  videoTitle.setAttribute('data-title',previousTitle);
+  // parent.setAttribute('data-title',oldTitle);
+  // parent.textContent = oldTitle;
+
   video.load();
   video.play();
   updatePlayButton();
-  // switches the old video to the thumbnail 
-  selectVideo.setAttribute('alt',url.slice(posVideo));
 }
 
 var lenThumb = newVideoThumb.length;

@@ -69,12 +69,14 @@
     border-radius: 4px;
   }
 
-  .videoTitle {
+  /* # = ID */
+  #videoTitle {
     color: #fff;
     position: absolute;
     top: 100%;
   }
-  
+
+  /* . = CLASS */
   .videoThumbTitle {
     color: #fff;
   }
