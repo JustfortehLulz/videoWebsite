@@ -352,11 +352,11 @@ const newVideoThumb = document.getElementsByClassName('thumbVideo');
 function changeVideo(element)
 {
   var newVideo = "";
-  var url = "";
+  var oldVideoSource = "";
   var indexSpace = 0;
-  var newURL = "";
+  var tempURL = "";
   var posVideo = 0;
-  var setUrl = "";
+  var newURL = "";
   var newTitle = "";
   var parent = "";
   
@@ -372,32 +372,35 @@ function changeVideo(element)
   newVideo = selectVideo.alt;
 
   // changes the title to the newly selected video
+  // performs swap of the old and new title
   newTitle = document.getElementById('title'+val);
-  title = newTitle.textContent;
+  tempTitle = newTitle.textContent;
   const oldVideoTitleText = document.getElementById('videoTitle');
   previousTitle = oldVideoTitleText.textContent;
-  oldVideoTitleText.textContent = title; 
-  oldVideoTitle.setAttribute('data-title',title);
+  oldVideoTitleText.textContent = tempTitle; 
+  oldVideoTitle.setAttribute('data-title',tempTitle);
   
   // grabs the video that will be swapped out
-  url = oldVideoTitle.src;
-  // check if video link have spaces
+  oldVideoSource = oldVideoTitle.src;
+  // check if video link have spaces assumes only one space
   if(newVideo.includes(" "))
   {
     indexSpace = newVideo.indexOf(" ");
-    newURL = newVideo.slice(0,indexSpace) + '%20' + newVideo.slice(indexSpace+1);
+    tempURL = newVideo.slice(0,indexSpace) + '%20' + newVideo.slice(indexSpace+1);
   }
   else
   {
-    newURL = newVideo;
+    tempURL = newVideo;
   }
-  posVideo = url.indexOf("video");
-  setUrl = url.slice(0,posVideo) + newURL;
+  // finds the index of video and 
+  //slices the video combining the previous video link and the new video link
+  posVideo = oldVideoSource.indexOf("video");
+  newURL = oldVideoSource.slice(0,posVideo) + tempURL;
   // sets the new url
-  oldVideoTitle.setAttribute('src',setUrl);
+  oldVideoTitle.setAttribute('src',newURL);
 
   // switches the old video to the thumbnail 
-  selectVideo.setAttribute('alt',url.slice(posVideo));
+  selectVideo.setAttribute('alt',oldVideoSource.slice(posVideo));
 
   // replaces the selected title to the old title
   // var oldTitle = oldVideoTitle.getAttribute('data-title');
@@ -408,10 +411,14 @@ function changeVideo(element)
   // parent.setAttribute('data-title',oldTitle);
   // parent.textContent = oldTitle;
 
+  // plays the video
+  
   video.load();
   video.play();
   updatePlayButton();
 }
+
+
 
 var lenThumb = newVideoThumb.length;
 // loop through the entire collection of newThumbs
