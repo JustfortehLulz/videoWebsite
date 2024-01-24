@@ -37,6 +37,8 @@ const playbackIcons = document.querySelectorAll('.playback-icons use');
 function updatePlayButton()
 {
     playbackIcons.forEach(icon => icon.classList.toggle('hidden'));
+    console.log(video.paused);
+    console.log(video.ended);
     if(video.paused || video.ended)
     {
         playButton.setAttribute('data-title', 'Play (k)');
@@ -45,6 +47,7 @@ function updatePlayButton()
     {
         playButton.setAttribute('data-title', 'Pause (k)');
     }
+    console.log(playButton)
 }
 
 video.addEventListener('play', updatePlayButton);
@@ -369,6 +372,7 @@ function changeVideo(element)
   // first part changes the video
   // grabbing the video that will be played
   video.pause();
+
   newVideo = selectVideo.alt;
 
   // changes the title to the newly selected video
@@ -415,7 +419,17 @@ function changeVideo(element)
   
   video.load();
   video.play();
-  updatePlayButton();
+  // console.log((playButton.textContent).localeCompare("Pause (k)"));
+  // // WHATS GOIN ON HERE>????
+  // if( (playButton.textContent).localeCompare("Pause (k)") != 0)
+  // {
+  //   video.pause();
+  // }
+  // else
+  // {
+  //   video.play();
+  // }
+  //updatePlayButton();
 }
 
 
@@ -424,6 +438,7 @@ var lenThumb = newVideoThumb.length;
 // loop through the entire collection of newThumbs
 for (var i = 0; i <lenThumb; i++)
 {
+  newVideoThumb[i].addEventListener('playing', updatePlayButton);
   newVideoThumb[i].addEventListener('click', changeVideo);
 }
 

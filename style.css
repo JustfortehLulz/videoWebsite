@@ -53,8 +53,9 @@
     grid-template-columns: repeat(9, 1fr);
     grid-auto-rows: minmax(100px, auto);
     grid-template-areas: "hd hd hd hd hd hd hd hd hd"
-      "sd sd main main main main main main main" 
-      "sd sd main main main main main main main";
+      "hd hd hd hd hd hd hd hd hd"
+      ". sd main main main . . . ." 
+      ". sd main main main . . . .";
   }
  
   
@@ -80,6 +81,31 @@
   .previewVideo
   {
     position: relative;
+    display: grid;
+    row-gap: 15px;
+    align-items: center;
+    height: inherit;
+  }
+
+  .thumbVideo
+  {
+    justify-self: center;
+  }
+
+  .previewText
+  {
+    position: relative;
+    display: grid;
+    row-gap: 15px;
+    align-items: center;
+    height: inherit;
+  }
+
+  /* . = CLASS */
+  .videoThumbTitle
+  {
+    color: #000000;
+    justify-self: left;
   }
 
   img
@@ -112,10 +138,7 @@
     top: 100%;
   }
 
-  /* . = CLASS */
-  .videoThumbTitle {
-    color: #000000;
-  }
+
 
   .video-controls {
     right: 0;
